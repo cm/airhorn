@@ -1,0 +1,29 @@
+{
+  "name": "airhorn",
+  "version": "0.1.0",
+  "description": "An airhorn bot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cm/airhorn.git"
+  },
+  "keywords": [
+    "airhorn",
+    "bot",
+    "discord",
+    "js"
+  ],
+  "author": "Christian Burland <christian@airhorn.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cm/airhorn/issues"
+  },
+  "homepage": "https://airhorn.io",
+  "dependencies": {
+    "@discordjs/opus": "^0.1.0",
+    "discord.js": "^12.1.1"
+  }
+}
