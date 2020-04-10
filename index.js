@@ -3,38 +3,16 @@ const fs = require('fs')
 
 const client = new Discord.Client()
 
-const responseNames = [
-  'chump',
-  'doofus',
-  'fool',
-  'jackass',
-  'moron',
-  'nerd',
-  'nimrod',
-  'nitwit',
-  'numnuts',
-  'schlub',
-  'sucker',
-  'twit'
-]
-
-const audioOptions = {
-  'airhorn': { file: 'airhorn', weight: '1000' },
-}
-
-const playSound = async (command, channel) => {
+const playSound = async (channel) => {
   const connection = await channel.join();
-  const dispatcher = connection.play(fs.createReadStream('./media.webm'), {
-    type: 'webm/opus',
-  })
-
-  dispatcher.on('speaking', speaking => {
-    if (!speaking) connection.disconnect()
-  })
-}
-
-const handleReady = async () => {
-
+  const dispatcher = connection.play(fs.createReadStream('./airhorn.ogg', {
+    type: 'ogg/opus'
+  }))
+  
+  dispatcher.on('finish', () => {
+    dispatcher.destroy()
+    connection.disconnect()
+  });
 }
 
 const handleMessage = async message => {
@@ -43,13 +21,29 @@ const handleMessage = async message => {
   if (message.content === '!airhorn') {
     // Only try to join the sender's voice channel if they are in one themselves
     if (message.member.voice.channel) {
-      const connection = await message.member.voice.channel.join();
+      playSound(message.member.voice.channel);
     } else {
-      message.reply(`Join a channel ${null}! (╯°□°)╯︵ ┻━┻`);
+      message.reply(`join a channel! (╯°□°)╯︵ ┻━┻`);
     }
+  }
+  
+  // For testing
+  if (message.content === '!ping') {
+    message.reply(`pong! (╯°□°)╯︵ ┻━┻`);
   }
 }
 
-client.on('message', handleMessage)
 
-client.login('token');
+/**
+ * The ready event is vital, it means that only _after_ this will your bot start reacting to information
+ * received from Discord
+ */
+client.on('ready', () => {
+  console.log('I am ready!');
+});
+
+// Create an event listener for messages
+client.on('message', handleMessage);
+
+// Log our bot in using the token from https://discordapp.com/developers/applications/me
+client.login(process.env.DISCORD_SECRET);
