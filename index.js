@@ -3,9 +3,9 @@ const fs = require('fs')
 
 const client = new Discord.Client()
 
-const playSound = async (channel) => {
+const playSound = async channel => {
   const connection = await channel.join();
-  const dispatcher = connection.play(fs.createReadStream('./airhorn.ogg', {
+  const dispatcher = connection.play(fs.createReadStream('./audio/airhorn.ogg', {
     type: 'ogg/opus'
   }))
   

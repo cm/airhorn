@@ -1,6 +1,6 @@
 {
   "name": "airhorn",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An airhorn bot.",
   "main": "index.js",
   "scripts": {
@@ -14,12 +14,12 @@
     "node": "12.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/airhorn-io"
+    "url": "https://glitch.com/edit/#!/airhorn-bot"
   },
   "license": "MIT",
   "keywords": [
     "node",
     "glitch",
-    "express"
+    "discord.js"
   ]
 }
